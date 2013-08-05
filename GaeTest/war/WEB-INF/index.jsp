@@ -1,23 +1,21 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ page import="org.test.model.Message" %>
-<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.google.appengine.api.users.*" %>
+<% UserService userService = UserServiceFactory.getUserService(); %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
-<!-- above set at the top of the file will set     -->
-<!-- the browser's rendering engine into           -->
-<!-- "Quirks Mode". Replacing this declaration     -->
-<!-- with a "Standards Mode" doctype is supported, -->
-<!-- but may lead to some differences in layout.   -->
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Guestbook</title>
+	<link rel="stylesheet" href="static/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="static/css/style.css" />
+</head>
+<body>
+	<div class="row">
+		<div class="col-lg-4">${isConnected ? username : "you aren't connected"}</div>
+		<div class="col-lg-8">${isConnected ? email : "you aren't connected"}</div>
+	</div>
 
-<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Guestbook</title>
-  </head>
-
-  <body>
     <h2>Send a message</h2>
     <form action="/" method="post">
     	<label for="name">Name:</label><input type="text" name="name"/>
@@ -31,5 +29,5 @@
     		<li><b>${message.name}:</b> ${message.message}</li>
     	</c:forEach>
     </ul>
-  </body>
+</body>
 </html>

@@ -6,27 +6,26 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>Guestbook</title>
+	<title>Efficient Todo List</title>
 	<link rel="stylesheet" href="static/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="static/css/style.css" />
 </head>
 <body>
 	<div class="row">
-		<div class="col-lg-4">${isConnected ? username : "you aren't connected"}</div>
-		<div class="col-lg-8">${isConnected ? email : "you aren't connected"}</div>
+		<div class="col-lg-4"><b>Username:</b> ${isConnected ? username : "you aren't connected"}</div>
+		<div class="col-lg-8"><b>Email:</b> ${isConnected ? email : "you aren't connected"}</div>
 	</div>
 
-    <h2>Send a message</h2>
+    <h2>Enter a task</h2>
     <form action="/" method="post">
     	<label for="name">Name:</label><input type="text" name="name"/>
-    	<label for="message">Message:</label><textarea type="text" name="message"></textarea>
     	<input type="submit" />
     </form>
     
-    <h2>Read messages</h2>
+    <h2>Read tasks</h2>
     <ul>
-    	<c:forEach items="${messages}" var="message">
-    		<li><b>${message.name}:</b> ${message.message}</li>
+    	<c:forEach items="${tasks}" var="message">
+    		<li>${task.name}</li>
     	</c:forEach>
     </ul>
 </body>

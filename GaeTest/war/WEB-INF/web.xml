@@ -4,17 +4,25 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/todo</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>*</role-name>
+		</auth-constraint>
+	</security-constraint>
 	<servlet>
-		<servlet-name>GuestbookServlet</servlet-name>
-		<servlet-class>org.test.GuestbookServlet</servlet-class>
+		<servlet-name>TodoServlet</servlet-name>
+		<servlet-class>org.test.servlets.TodoServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>GuestbookServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<servlet-name>TodoServlet</servlet-name>
+		<url-pattern>/todo</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>org.test.LoginServlet</servlet-class>
+		<servlet-class>org.test.servlets.LoginServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>

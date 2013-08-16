@@ -11,12 +11,12 @@
 <body class="container">
 	<header class="main">
 	    <h1>
-	    	<a href="/" title="Efficient Todo List">Efficient Todo List</a>
+	    	<a href="/" title="Efficient Todo List">Efficient <span class="label label-info">Todo-List</span></a>
 	    </h1>
 		<nav>
 			<ul>
-				<li><b>Username:</b> ${isConnected ? username : "you aren't connected"}</li>
-				<li><b>Email:</b> ${isConnected ? email : "you aren't connected"}</li>
+				<li><b>Username:</b> ${username}</li>
+				<li><b>Email:</b> ${email}</li>
 			</ul>
 		</nav>
 	</header>
@@ -28,50 +28,59 @@
 			</header>
 			<div class="panel-body">
 			    <ul class="nav nav-pills nav-stacked">
-			    	<li><a href="/">All</a></li>
-			    	<li <c:if test="${param.category == 'Today'}">class="active"</c:if>>
-			    		<a href="/?category=Today">Today</a>
+			    	<li <c:if test="${param.category == 'Today' or param.category == null}">class="active"</c:if>>
+			    		<a href="/?category=Today">
+			    			Today
+			    			<c:if test="${param.category == 'Today' or param.category == null}">
+				    			<span class="badge pull-right">${tasksCount}</span>
+		    				</c:if>
+		    			</a>
 		    		</li>
 			    	<li <c:if test="${param.category == 'Important'}">class="active"</c:if>>
-			    		<a href="/?category=Important">Important</a>
+			    		<a href="/?category=Important">
+			    			Important
+			    			<c:if test="${param.category == 'Important'}">
+				    			<span class="badge pull-right">${tasksCount}</span>
+		    				</c:if>
+		    			</a>
 		    		</li>
 			    	<li <c:if test="${param.category == 'Reminder'}">class="active"</c:if>>
-			    		<a href="/?category=Reminder">Reminder</a>
+			    		<a href="/?category=Reminder">
+			    			Reminder
+			    			<c:if test="${param.category == 'Reminder'}">
+				    			<span class="badge pull-right">${tasksCount}</span>
+		    				</c:if>
+		    			</a>
 		    		</li>
 			    	<li <c:if test="${param.category == 'Life'}">class="active"</c:if>>
-			    		<a href="/?category=Life">Life</a>
+			    		<a href="/?category=Life">
+			    			Life
+			    			<c:if test="${param.category == 'Life'}">
+				    			<span class="badge pull-right">${tasksCount}</span>
+		    				</c:if>
+		    			</a>
 		    		</li>
 			    	<li <c:if test="${param.category == 'Work'}">class="active"</c:if>>
-			    		<a href="/?category=Work">Work</a>
+			    		<a href="/?category=Work">
+			    			Work
+			    			<c:if test="${param.category == 'Work'}">
+				    			<span class="badge pull-right">${tasksCount}</span>
+		    				</c:if>
+		    			</a>
 		    		</li>
 			    </ul>
 		    </div>
 		</aside>
 		
 		<div class="col-lg-9">
-			<section class="panel">
-				<header class="panel-heading">
-				    <h2>Enter a task</h2>
-				</header>
+			<header class="panel">
 				<div class="panel-body">
-				    <form action="/" method="post" class="form-horizontal">
+				    <form method="post" class="form-horizontal">
 				    	<fieldset>
 				    		<div class="form-group">
 						    	<label for="name" class="col-lg-2">Name</label>
 						    	<div class="col-lg-6">
-							    	<input type="text" name="name" class="form-control"/>
-						    	</div>
-					    	</div>
-				    		<div class="form-group">
-						    	<label for="category" class="col-lg-2">Category</label>
-						    	<div class="col-lg-6">
-							    	<select name="category" class="form-control" multiple>
-							    		<option value="Today" selected="selected">Today</option>
-							    		<option value="Important">Important</option>
-							    		<option value="Reminder">Reminder</option>
-							    		<option value="Life">Life</option>
-							    		<option value="Work">Work</option>
-							    	</select>
+							    	<input type="text" name="name" class="form-control" placeholder="Add a task..."/>
 						    	</div>
 					    	</div>
 					    	<div class="form-group">
@@ -82,17 +91,22 @@
 				    	</fieldset>
 				    </form>
 			    </div>
-		    </section>
+		    </header>
 		    
 		    <section class="panel">
 				<header class="panel-heading">
 				    <h2>Read tasks</h2>
 				</header>
-		    	<c:forEach items="${tasks}" var="task">
-		    		<article class="panel-body">
-		    			<b>${task.category.name}:</b> ${task.name}
-		   			</article>
-		    	</c:forEach>
+				<div class="list-group">
+			    	<c:forEach items="${tasks}" var="task">
+			    		<a href="/delete?id=${task.id}&category=${not empty param.category ? param.category : 'Today'}" class="list-group-item">
+				    		<article class="panel-body">
+				    			<b>${task.category.name}</b>: ${task.name}
+				    			<span class="pull-right">${task.deadline}</span>
+				   			</article>
+			   			</a>
+			    	</c:forEach>
+		    	</div>
 		    </section>
 	    </div>
 	</main>

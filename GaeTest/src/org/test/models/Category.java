@@ -11,7 +11,8 @@ import com.googlecode.objectify.annotation.Index;
 @Cache
 @Index
 public class Category {
-	@Id String id;
+	// fields
+	@Id Long id;
 	String name;
 	
 	@SuppressWarnings("unused")
@@ -21,11 +22,11 @@ public class Category {
 		this.name = name;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

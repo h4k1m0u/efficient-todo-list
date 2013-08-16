@@ -19,9 +19,9 @@ public class LoginServlet extends HttpServlet {
 		
 		if (!isConnected)
 			// redirect to 'gmail' login page
-			resp.sendRedirect(userService.createLoginURL("/"));
+			resp.sendRedirect(userService.createLoginURL("/?category=Today"));
 		else 
 			// redirect to 'index' view
-			resp.sendRedirect("/");
+			resp.sendRedirect("/?category=Today");
 	}
 }

@@ -22,7 +22,7 @@ import com.googlecode.objectify.cmd.Query;
 
 // this servlet is only reachable when the user is logged in
 @SuppressWarnings("serial")
-public class TodoServlet extends HttpServlet {
+public class CreateReadServlet extends HttpServlet {
 	static {
 		ObjectifyService.register(Task.class);
 		ObjectifyService.register(Category.class);
@@ -45,17 +45,17 @@ public class TodoServlet extends HttpServlet {
 			String userId = (String)req.getSession().getAttribute("id");
 			Query<Task> query = ofy().load().type(Task.class).filter("userId", userId);
 			
-			if (req.getParameter("category") != null) {
-				// get selected 'category' from the datastore
-				String categoryName = (String)req.getParameter("category");
-				Category category = ofy().load().type(Category.class).filter("name", categoryName).first().now();
-				query = query.filter("category", category);
-			}
+			// get selected 'category' from the datastore (by default 'Today' tasks)
+			String categoryName = (req.getParameter("category") != null ? (String)req.getParameter("category") : "Today");
+			Category category = ofy().load().type(Category.class).filter("name", categoryName).first().now();
+			query = query.filter("category", category);
 			
 			List<Task> tasks = query.list();
+			int tasksCount = tasks.size();
 			
 			// forward 'tasks' to index view
 			req.setAttribute("tasks", tasks);
+			req.setAttribute("tasksCount", tasksCount);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -69,14 +69,14 @@ public class TodoServlet extends HttpServlet {
 		Date createdOn = new Date();
 		Date deadline = new Date();
 		
-		// get selected 'category' from the datastore
-		String categoryName = (String)req.getParameter("category");
+		// get selected 'category' from the datastore (by default 'Today' tasks)
+		String categoryName = (req.getParameter("category") != null ? (String)req.getParameter("category") : "Today");
 		Category category = ofy().load().type(Category.class).filter("name", categoryName).first().now();
 		
 		Task task = new Task(taskName, userId, createdOn, deadline, category);
 		ofy().save().entity(task).now();
 		
 		// refresh 'index' view
-		resp.sendRedirect("/");
+		resp.sendRedirect("/?category=" + categoryName);
 	}
 }

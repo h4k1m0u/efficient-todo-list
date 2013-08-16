@@ -14,7 +14,7 @@ import com.googlecode.objectify.annotation.Load;
 @Index
 public class Task {
 	// fields
-	@Id String id;
+	@Id Long id;
 	String name;
 	Date createdOn;
 	Date deadline;
@@ -34,11 +34,11 @@ public class Task {
 		setCategory(category);
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

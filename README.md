@@ -2,7 +2,10 @@ efficient-todo-list
 ===================
 
 This is a simple Todo-List that requires it's user to be logged in through Gmail. 
-The user has many categories to classify his tasks. 
+The user has many categories to classify his tasks.  
+
+You can try it here:  
+[Link to the Todo-list](https://efficient-todo-list.appspot.com/)
 
 # Tools
 

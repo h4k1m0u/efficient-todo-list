@@ -1,0 +1,17 @@
+/* bootstrap customization */
+
+/* main elements */
+.main{padding:20px;}
+header.main{margin-bottom:30px;border-bottom:1px solid #E5E5E5;}
+footer.main{margin-top:30px;border-top:1px solid #E5E5E5;}
+footer{color:#999;}
+
+/* other elements */
+.row{margin:0;}
+ul{list-style:none;}
+.tasks header{margin-bottom:0;}
+.tasks .list-group{margin-top:0;}
+.list-group-item{color:#428BCA;}
+.list-group-item:hover{background-color:#F5F5F5;cursor:pointer;}
+.icon-large{vertical-align:middle;}
+.icon-small{transform:scale(0.5);-ms-transform:scale(0.5);-webkit-transform:scale(0.5);}

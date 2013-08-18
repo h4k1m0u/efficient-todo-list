@@ -27,7 +27,8 @@ public class DeleteServlet extends HttpServlet {
 		Long taskId = Long.parseLong(req.getParameter("id"), 10);
 		
 		Task deletedTask = ofy().load().type(Task.class).id(taskId).now();
-		if (deletedTask.getUserId() == userId)
+		
+		if (deletedTask.getUserId().equals(userId))
 			ofy().delete().entity(deletedTask).now();
 		
 		// refresh 'index' view
